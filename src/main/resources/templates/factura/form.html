@@ -39,6 +39,13 @@
 					</div>
 
 					<div class="form-group row">
+						<label for="buscar_producto" class="col-sm-2 col-form-label" th:text="'Buscar Producto'"></label>
+						<div class="col-sm-6">
+							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control"></input>
+						</div>
+					</div>
+
+					<div class="form-group row">
 						<div class="col-sm-6">
 							<input type="submit" th:value="${titulo}" class="btn btn-secondary"/>
 						</div>
@@ -49,5 +56,6 @@
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="factura/js/autocomplete-productos :: javascript"></script>
 </body>
 </html>
