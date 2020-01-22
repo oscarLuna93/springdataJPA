@@ -21,4 +21,10 @@ public class ProductoServiceImpl implements IProductoService{
 		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Producto findProductoById(Long id) {
+		return productoDao.findById(id).orElse(null);
+	}
+	
 }
