@@ -30,5 +30,11 @@ public class FacturaServiceImpl implements IFacturaService{
 	public void deleteFactura(Long id) {
 		facturaDao.deleteById(id);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Factura fetchFacturaByIdWithClienteWithItemFacturaWithProducto(Long id) {
+		return facturaDao.fetchByIdWithClienteWithItemFacturaWithProducto(id);
+	}
 	
 }
