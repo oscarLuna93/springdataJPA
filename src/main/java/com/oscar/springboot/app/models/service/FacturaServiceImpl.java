@@ -18,5 +18,11 @@ public class FacturaServiceImpl implements IFacturaService{
 	public void saveFactura(Factura factura) {
 		facturaDao.save(factura);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Factura findFacturaById(Long id) {
+		return facturaDao.findById(id).orElse(null);
+	}
 	
 }
