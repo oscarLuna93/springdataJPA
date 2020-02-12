@@ -1,7 +1,5 @@
 package com.oscar.springboot.app;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.oscar.springboot.app.auth.handler.LoginSuccesHandler;
+import com.oscar.springboot.app.models.service.JpaUserDetailsService;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,8 +18,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private LoginSuccesHandler successHandler;
 	
-	@Autowired 
-	private DataSource datasource;
+	@Autowired
+	private JpaUserDetailsService userDetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -32,14 +31,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		PasswordEncoder encoder = passwordEncoder();  
 		
 		builder
-		.jdbcAuthentication()
-		.dataSource(datasource)
-		.passwordEncoder(encoder)
-		.usersByUsernameQuery("select username, password, enabled from usuarios where username=?")
-		.authoritiesByUsernameQuery("select u.username, r.rol "
-									+ "from roles r "
-									+ "inner join usuarios u "
-									+ "on (r.usuario_id = u.id) where u.username=?");
+		.userDetailsService(userDetailsService)
+		.passwordEncoder(encoder);
 	}
 
 	@Override
