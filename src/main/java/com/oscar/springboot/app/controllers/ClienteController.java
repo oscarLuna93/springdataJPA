@@ -3,6 +3,7 @@ package com.oscar.springboot.app.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,6 +53,9 @@ public class ClienteController {
 
 	@Autowired
 	private IUploadService uploadService;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	@GetMapping(value = "/uploads/{fileName:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String fileName) {
@@ -82,7 +87,9 @@ public class ClienteController {
 
 	@RequestMapping(value = {"/listar", "/"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model
-						, Authentication authentication) {
+						, Authentication authentication
+						, Locale locale) {
+		
 		if (authentication != null) {
 			logger.info("Tu usuario es ".concat(authentication.getName()));
 		}
@@ -93,7 +100,7 @@ public class ClienteController {
 
 		PageRender<Cliente> pageRender = new PageRender<>("listar", clientes);
 
-		model.addAttribute("titulo", "Listado de Clientes");
+		model.addAttribute("titulo", messageSource.getMessage("text.cliente.listar.titulo", null, locale));
 		model.addAttribute("clientes", clientes);
 		model.addAttribute("page", pageRender);
 		
