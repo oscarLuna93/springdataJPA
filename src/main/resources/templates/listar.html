@@ -8,8 +8,10 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 			
-				<h4 class="card-title"> <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-primary btn-xs">Crear
-					Cliente</a>
+				<h4 class="card-title"> 
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-primary btn-xs">Crear Cliente</a>
+					
+					<a class="btn btn-outline-warning btn-xs float-right mx-1" th:href="@{'/listar'(format=json)}">JSON</a>
 				</h4>
 				<table class="table table-striped">
 					<thead>
