@@ -24,6 +24,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 //asginar nombre de tabla
 @Table(name = "clientes")
@@ -54,6 +56,7 @@ public class Cliente implements Serializable{
 	private Date createAt;
 	
 	@OneToMany(mappedBy = "cliente" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Factura> facturas;
 	
 	@PrePersist
