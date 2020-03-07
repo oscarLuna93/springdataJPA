@@ -73,11 +73,21 @@ public class FacturaXlsxView extends AbstractXlsxView{
 		int rownum = 10;
 		for(ItemFactura item: factura.getItems()) {
 			Row fila = sheet.createRow(rownum++);
+			cell = fila.createCell(0);
+			cell.setCellValue(item.getProducto().getNombre());
+			cell.setCellStyle(tbodyStyle);
 			
-			fila.createCell(0).setCellValue(item.getProducto().getNombre());
-			fila.createCell(1).setCellValue(item.getProducto().getPrecio());
-			fila.createCell(2).setCellValue(item.getCantidad());
-			fila.createCell(3).setCellValue(item.calcularImporte());
+			cell = fila.createCell(1);
+			cell.setCellValue(item.getProducto().getPrecio());
+			cell.setCellStyle(tbodyStyle);
+			
+			cell = fila.createCell(2);
+			cell.setCellValue(item.getCantidad());
+			cell.setCellStyle(tbodyStyle);
+			
+			cell = fila.createCell(3);
+			cell.setCellValue(item.calcularImporte());
+			cell.setCellStyle(tbodyStyle);
 		}
 		
 		Row filaTotal = sheet.createRow(rownum);
