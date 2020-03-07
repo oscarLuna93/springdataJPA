@@ -91,8 +91,14 @@ public class FacturaXlsxView extends AbstractXlsxView{
 		}
 		
 		Row filaTotal = sheet.createRow(rownum);
-		filaTotal.createCell(2).setCellValue("Gran Total: ");
-		filaTotal.createCell(3).setCellValue(factura.getTotal());
+		cell = filaTotal.createCell(2);
+		cell.setCellValue("Gran Total: ");
+		cell.setCellStyle(tbodyStyle);
+		
+		
+		cell = filaTotal.createCell(3);
+		cell.setCellValue(factura.getTotal());
+		cell.setCellStyle(tbodyStyle);
 	}
 
 }
