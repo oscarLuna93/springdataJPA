@@ -30,7 +30,7 @@ public class ClienteCsvView extends AbstractView {
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		response.setHeader("Content-Disposition", "attachment: filename=\"clientes.csv\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"clientes.csv\"");
 		response.setContentType(getContentType());
 		
 		Page<Cliente> clientes = (Page<Cliente>) model.get("clientes");
